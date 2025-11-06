@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.life.finmate.user.mapper.UserMapper">
+    <select id="findByEmail" resultType="com.life.finmate.user.domain.User">
+        SELECT
+            *
+        FROM users
+        WHERE email = #{email}
+    </select>
+    <insert id="save" parameterType="com.life.finmate.user.domain.User" keyProperty="id" useGeneratedKeys="true">
+        insert into
+            users(email, password, username, currency)
+        VALUES
+            (#{email}, #{password}, #{userName}, #{currency})
+    </insert>
+</mapper>
