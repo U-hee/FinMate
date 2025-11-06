@@ -1,0 +1,21 @@
+package com.life.finmate.goal.domain;
+
+import lombok.Builder;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Builder
+public class Goal {
+    private Long id;
+    private Long userId;
+    private String goalName;
+    private String goalType; // saving, debt_repayment, investment
+    private BigDecimal targetAmount;
+    private BigDecimal currentAmount;
+    private LocalDate targetDate;
+    private Boolean isCompleted;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+}
