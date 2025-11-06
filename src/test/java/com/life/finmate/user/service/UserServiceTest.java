@@ -1,7 +1,8 @@
 package com.life.finmate.user.service;
 
 import com.life.finmate.user.domain.User;
-import com.life.finmate.user.dto.UserRequest;
+import com.life.finmate.user.dto.UserCreateRequest;
+import com.life.finmate.user.dto.UserUpdateRequest;
 import com.life.finmate.user.mapper.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
@@ -46,7 +46,7 @@ class UserServiceTest {
         assertThat(userBEmail.get().getEmail()).isEqualTo(email);
     }
 
-    @DisplayName("save user")
+    @DisplayName("사용자 저장 테스트")
     @Test
     void saveUser() {
         // given
@@ -55,7 +55,7 @@ class UserServiceTest {
         String password = "1234";
         String currency = "KR";
 
-        UserRequest userRequest = UserRequest.builder()
+        UserCreateRequest userRequest = UserCreateRequest.builder()
                 .email(email)
                 .userName(userName)
                 .password(password)
@@ -70,7 +70,7 @@ class UserServiceTest {
         assertThat(save).isNotNull();
     }
 
-    @DisplayName("email 중복 체크되어 실패")
+    @DisplayName("email 중복 체크되어 실패 테스트")
     @Test
     void FailSaveUser() {
         // given
@@ -79,7 +79,7 @@ class UserServiceTest {
         String password = "1234";
         String currency = "KR";
 
-        UserRequest userRequest = UserRequest.builder()
+        UserCreateRequest userRequest = UserCreateRequest.builder()
                 .email(email)
                 .userName(userName)
                 .password(password)
@@ -87,13 +87,48 @@ class UserServiceTest {
                 .build();
 
 
-        User save = userService.save(userRequest);
         // when
+        User save = userService.save(userRequest);
 
         // then
-        // IllegalStateException()
         assertThatThrownBy(() -> userService.save(userRequest))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("User already exists!");
+    }
+
+    @DisplayName("사용자 정보 업데이트 성공 테스트")
+    @Test
+    void userUpdateSuccessfully() {
+        // given
+        String email = "test@email.com";
+        String userName = "test";
+        String password = "1234";
+        String currency = "KR";
+
+        String newUserName = "tester";
+
+        UserCreateRequest originUser = UserCreateRequest.builder()
+                .email(email)
+                .userName(userName)
+                .password(password)
+                .currency(currency)
+                .build();
+
+        User save = userService.save(originUser);
+        UserUpdateRequest updateUser= UserUpdateRequest.builder()
+                .id(save.getId())
+                .email(email)
+                .userName(newUserName)
+                .build();
+
+        // when
+        userService.update(updateUser);
+
+        Optional<User> byEmail = userMapper.findByEmail(updateUser.getEmail());
+        // then
+        assertThat(byEmail).isNotNull();
+        assertThat(byEmail.get().getUserName()).isEqualTo(newUserName);
+        assertThat(byEmail.get().getPassword()).isEqualTo(password);
+        assertThat(byEmail.get().getCurrency()).isEqualTo(currency);
     }
 }

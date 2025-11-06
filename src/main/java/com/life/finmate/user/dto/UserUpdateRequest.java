@@ -6,17 +6,18 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class UserRequest {
-    String email;
-    String userName;
-    String password;
-    String currency;
+public class UserUpdateRequest {
+    private long id;
+    private String email;
+    private String password;
+    private String userName;
+    private String currency;
 
-    public User toEntity()  {
+    public User toEntity() {
         return User.builder()
                 .email(this.email)
-                .userName(this.userName)
                 .password(this.password)
+                .userName(this.userName)
                 .currency(this.currency)
                 .build();
     }
