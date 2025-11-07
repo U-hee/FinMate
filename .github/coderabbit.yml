@@ -1,0 +1,31 @@
+pull_request:
+  summary:
+    enabled: true
+    template: |
+      ## 🏷 작업 유형 (선택)
+      - [ ] feat
+      - [ ] fix
+      - [ ] refactor
+      - [ ] chore
+      - [ ] docs
+      - [ ] style
+
+      ## 🌱 브랜치 정보
+      {{branch_name}}
+
+      ## 📌 변경 사항 요약
+      {{summary}}
+
+      ## 🔗 관련 이슈 / 태스크
+      {{issue_number}}
+
+      ## 👀 리뷰어에게 전달 사항
+      {{notes}}
+
+      ## ⚠️ Breaking Changes 여부
+      - [ ] Yes
+      - [ ] No
+
+  review:
+    enabled: true
+    suggestions: true
