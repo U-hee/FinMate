@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
@@ -41,5 +41,31 @@ class GoalServiceTest {
         assertThat(goal).isNotNull();
         assertThat(goalDto.getGoalName()).isEqualTo(goal.getGoalName());
 
+    }
+
+    @Test
+    @DisplayName("목표를 사용자별로 조회하는 테스트")
+    void findAll() {
+       //given
+        for (int i = 0; i < 5; i++) {
+            GoalCreateRequestDto goalDto = GoalCreateRequestDto.builder()
+                    .userId(45L)
+                    .goalType("saving")
+                    .goalName("저축"+i)
+                    .targetAmount(10000L)
+                    .currentAmount(0L)
+                    .targetDate(LocalDate.now())
+                    .build();
+            goalService.save(goalDto);
+        }
+
+       //when
+        List<Goal> goals = goalService.findByUserId(45);
+
+       //then
+        assertThat(goals).isNotNull();
+        assertThat(goals).isNotEmpty();
+        assertThat(goals.size()).isEqualTo(5);
+        assertThat(goals.getFirst().getGoalName()).isEqualTo("저축0");
     }
 }
