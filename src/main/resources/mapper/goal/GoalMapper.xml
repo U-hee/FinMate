@@ -4,7 +4,7 @@
 <mapper namespace="com.life.finmate.goal.mapper.GoalMapper">
 
     <!-- Create -->
-    <insert id="save" parameterType="com.life.finmate.goal.domain.Goal" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.life.finmate.goal.domain.Goal" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO goals
             (user_id, goal_name, goal_type, target_amount, target_date, current_amount)
         VALUES
@@ -25,7 +25,7 @@
     </select>
 
     <!-- Update -->
-    <update id="updateById" parameterType="long">
+    <update id="updateById" parameterType="long" keyProperty="id">
         UPDATE goals SET
             <if test="goalName != null and goalName != ''">
                 goal_name = #{goalName},
@@ -39,7 +39,7 @@
             <if test="currentAmount != null and currentAmount != ''">
                 current_amount = #{currentAmount},
             </if>
-            <if test="targetDate != null and targetDate != ''">
+            <if test="targetDate != null and targetDate">
                 target_date = #{targetDate},
             </if>
             updated_at = NOW()

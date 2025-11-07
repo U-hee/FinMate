@@ -2,6 +2,7 @@ package com.life.finmate.goal.service;
 
 import com.life.finmate.goal.domain.Goal;
 import com.life.finmate.goal.dto.GoalCreateRequestDto;
+import com.life.finmate.goal.dto.GoalUpdateRequestDto;
 import com.life.finmate.goal.mapper.GoalMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,20 @@ public class GoalService {
 
     public Goal findById(Long id) {
         return goalMapper.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT FOUND" + id)
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT FOUND : " + id)
         );
+    }
+
+    public Goal updateById(GoalUpdateRequestDto updateRequestDto) {
+//        Goal goal = findById(updateRequestDto.getId());
+//        GoalUpdateRequestDto fromDto= updateRequestDto.from(goal);
+        Goal resultGoal = updateRequestDto.toEntity();
+
+        goalMapper.updateById(resultGoal);
+        return resultGoal;
+    }
+
+    public void deleteById(Long id) {
+        goalMapper.deleteById(id);
     }
 }

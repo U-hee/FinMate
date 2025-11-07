@@ -11,4 +11,6 @@ public interface GoalMapper {
     void save(Goal goal);
     List<Goal> findByUserId(long userId);
     Optional<Goal> findById(long id);
+    void updateById(Goal goal);
+    void deleteById(Long id);
 }
