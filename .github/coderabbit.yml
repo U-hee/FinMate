@@ -1,3 +1,4 @@
+language: "ko-KR"
 pull_request:
   summary:
     enabled: true
