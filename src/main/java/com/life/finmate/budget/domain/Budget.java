@@ -1,11 +1,13 @@
 package com.life.finmate.budget.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Builder
+@Getter
 public class Budget {
     private Long id;
     private Long userId;

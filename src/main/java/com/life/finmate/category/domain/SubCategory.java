@@ -1,10 +1,12 @@
 package com.life.finmate.category.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Builder
+@Getter
 public class SubCategory {
     private Long id;
     private Long mainCategoryId;

@@ -7,10 +7,10 @@ import lombok.Getter;
 @Builder
 @Getter
 public class UserCreateRequest {
-    String email;
-    String userName;
-    String password;
-    String currency;
+    private String email;
+    private String userName;
+    private String password;
+    private String currency;
 
     public User toEntity()  {
         return User.builder()

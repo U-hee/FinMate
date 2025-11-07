@@ -5,7 +5,6 @@ import com.life.finmate.user.dto.UserCreateRequest;
 import com.life.finmate.user.dto.UserUpdateRequest;
 import com.life.finmate.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,6 +34,9 @@ public class UserService {
     public int update(UserUpdateRequest userRequest) {
         findByEmail(userRequest.getEmail()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 사용자 입니다."));
         return userMapper.updateUser(userRequest);
+    }
 
+    public int deleteById(Long id) {
+        return userMapper.deleteById(id);
     }
 }

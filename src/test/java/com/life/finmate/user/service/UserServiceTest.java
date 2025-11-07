@@ -88,7 +88,7 @@ class UserServiceTest {
 
 
         // when
-        User save = userService.save(userRequest);
+        userService.save(userRequest);
 
         // then
         assertThatThrownBy(() -> userService.save(userRequest))
@@ -130,5 +130,30 @@ class UserServiceTest {
         assertThat(byEmail.get().getUserName()).isEqualTo(newUserName);
         assertThat(byEmail.get().getPassword()).isEqualTo(password);
         assertThat(byEmail.get().getCurrency()).isEqualTo(currency);
+    }
+
+    @DisplayName("사용자 삭제 테스트")
+    @Test
+    void deleteByUserId() {
+        // given
+        String email = "test@email.com";
+        String userName = "test";
+        String password = "1234";
+        String currency = "KR";
+
+        UserCreateRequest userRequest = UserCreateRequest.builder()
+                .email(email)
+                .userName(userName)
+                .password(password)
+                .currency(currency)
+                .build();
+        User save = userService.save(userRequest);
+
+        // when
+        int result = userService.deleteById(save.getId());
+
+        // then
+        assertThat(result).isEqualTo(1);
+        assertThat(userMapper.findByEmail(save.getEmail()).isPresent()).isFalse();
     }
 }

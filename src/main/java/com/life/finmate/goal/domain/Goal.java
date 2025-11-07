@@ -1,12 +1,14 @@
 package com.life.finmate.goal.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
+@Getter
 public class Goal {
     private Long id;
     private Long userId;
