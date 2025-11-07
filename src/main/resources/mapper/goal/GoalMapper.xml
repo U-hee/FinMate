@@ -18,6 +18,12 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="findById" parameterType="long" resultType="com.life.finmate.goal.domain.Goal">
+        SELECT *
+        FROM goals
+        WHERE id = #{Id}
+    </select>
+
     <!-- Update -->
     <update id="updateById" parameterType="long">
         UPDATE goals SET

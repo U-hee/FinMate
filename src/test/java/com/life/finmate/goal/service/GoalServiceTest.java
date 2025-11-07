@@ -68,4 +68,29 @@ class GoalServiceTest {
         assertThat(goals.size()).isEqualTo(5);
         assertThat(goals.getFirst().getGoalName()).isEqualTo("저축0");
     }
+
+    @Test
+    @DisplayName("단일 조회 테스트")
+    void findById() {
+        // given
+        long userId = 45L;
+        String goalName = "저축";
+        GoalCreateRequestDto goalDto = GoalCreateRequestDto.builder()
+                .userId(userId)
+                .goalType("saving")
+                .goalName(goalName)
+                .targetAmount(10000L)
+                .currentAmount(0L)
+                .targetDate(LocalDate.now())
+                .build();
+        goalService.save(goalDto);
+        long id = goalService.findByUserId(userId).getFirst().getId();
+
+        // when
+        Goal resultGoal = goalService.findById(id);
+
+        // then
+        assertThat(resultGoal).isNotNull();
+        assertThat(resultGoal.getGoalName()).isEqualTo(goalName);
+    }
 }

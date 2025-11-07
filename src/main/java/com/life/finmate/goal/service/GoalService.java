@@ -23,11 +23,16 @@ public class GoalService {
     }
 
     public List<Goal> findByUserId(long userId) {
-
         List<Goal> result = goalMapper.findByUserId(userId);
         if (result.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT FOUND");
         }
         return result;
+    }
+
+    public Goal findById(Long id) {
+        return goalMapper.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT FOUND" + id)
+        );
     }
 }
