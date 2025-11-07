@@ -1,8 +1,8 @@
 package com.life.finmate.user.service;
 
 import com.life.finmate.user.domain.User;
-import com.life.finmate.user.dto.UserCreateRequest;
-import com.life.finmate.user.dto.UserUpdateRequest;
+import com.life.finmate.user.dto.UserCreateRequestDto;
+import com.life.finmate.user.dto.UserUpdateRequestDto;
 import com.life.finmate.user.mapper.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,7 +55,7 @@ class UserServiceTest {
         String password = "1234";
         String currency = "KR";
 
-        UserCreateRequest userRequest = UserCreateRequest.builder()
+        UserCreateRequestDto userRequest = UserCreateRequestDto.builder()
                 .email(email)
                 .userName(userName)
                 .password(password)
@@ -79,7 +79,7 @@ class UserServiceTest {
         String password = "1234";
         String currency = "KR";
 
-        UserCreateRequest userRequest = UserCreateRequest.builder()
+        UserCreateRequestDto userRequest = UserCreateRequestDto.builder()
                 .email(email)
                 .userName(userName)
                 .password(password)
@@ -107,7 +107,7 @@ class UserServiceTest {
 
         String newUserName = "tester";
 
-        UserCreateRequest originUser = UserCreateRequest.builder()
+        UserCreateRequestDto originUser = UserCreateRequestDto.builder()
                 .email(email)
                 .userName(userName)
                 .password(password)
@@ -115,7 +115,7 @@ class UserServiceTest {
                 .build();
 
         User save = userService.save(originUser);
-        UserUpdateRequest updateUser= UserUpdateRequest.builder()
+        UserUpdateRequestDto updateUser= UserUpdateRequestDto.builder()
                 .id(save.getId())
                 .email(email)
                 .userName(newUserName)
@@ -141,7 +141,7 @@ class UserServiceTest {
         String password = "1234";
         String currency = "KR";
 
-        UserCreateRequest userRequest = UserCreateRequest.builder()
+        UserCreateRequestDto userRequest = UserCreateRequestDto.builder()
                 .email(email)
                 .userName(userName)
                 .password(password)

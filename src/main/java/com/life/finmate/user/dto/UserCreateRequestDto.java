@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class UserCreateRequest {
+public class UserCreateRequestDto {
     private String email;
     private String userName;
     private String password;

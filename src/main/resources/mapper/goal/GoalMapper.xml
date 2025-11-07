@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.life.finmate.goal.mapper.GoalMapper">
+
+    <!-- Create -->
+    <insert id="save" parameterType="com.life.finmate.goal.domain.Goal" useGeneratedKeys="true">
+        INSERT INTO goals
+            (user_id, goal_name, goal_type, target_amount, target_date, current_amount)
+        VALUES
+            (#{userId}, #{goalName}, #{goalType}, #{targetAmount}, #{targetDate}, #{currentAmount} )
+    </insert>
+
+    <!-- Read -->
+    <select id="findByUserId" parameterType="long" resultType="com.life.finmate.goal.domain.Goal">
+        SELECT *
+        FROM goals
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- Update -->
+    <update id="updateById" parameterType="long">
+        UPDATE goals SET
+            <if test="goalName != null and goalName != ''">
+                goal_name = #{goalName},
+            </if>
+            <if test="goalType != null and goalType != ''">
+                goal_type = #{goalType},
+            </if>
+            <if test="targetAmount != null and targetAmount != ''">
+                target_amount = #{targetAmount},
+            </if>
+            <if test="currentAmount != null and currentAmount != ''">
+                current_amount = #{currentAmount},
+            </if>
+            <if test="targetDate != null and targetDate != ''">
+                target_date = #{targetDate},
+            </if>
+            updated_at = NOW()
+        WHERE
+            id = #{id}
+    </update>
+    <!-- Delete -->
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM goals
+        WHERE id = #{id}
+    </delete>
+</mapper>

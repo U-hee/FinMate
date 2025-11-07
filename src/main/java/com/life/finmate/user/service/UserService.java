@@ -1,8 +1,8 @@
 package com.life.finmate.user.service;
 
 import com.life.finmate.user.domain.User;
-import com.life.finmate.user.dto.UserCreateRequest;
-import com.life.finmate.user.dto.UserUpdateRequest;
+import com.life.finmate.user.dto.UserCreateRequestDto;
+import com.life.finmate.user.dto.UserUpdateRequestDto;
 import com.life.finmate.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public User save(UserCreateRequest userRequest) {
+    public User save(UserCreateRequestDto userRequest) {
         findByEmail(userRequest.getEmail()).ifPresent(user -> {
             throw new IllegalStateException("User already exists!");
         });
@@ -31,7 +31,7 @@ public class UserService {
         return userMapper.findByEmail(email);
     }
 
-    public int update(UserUpdateRequest userRequest) {
+    public int update(UserUpdateRequestDto userRequest) {
         findByEmail(userRequest.getEmail()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 사용자 입니다."));
         return userMapper.updateUser(userRequest);
     }
