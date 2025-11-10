@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.life.finmate.goal.mapper.GoalMapper">
-
     <resultMap id="goalResultMap" type="com.life.finmate.goal.domain.Goal">
         <id property="id" column="id"/>
         <result property="userId" column="user_id"/>
@@ -14,6 +13,7 @@
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
    </resultMap>
+
     <!-- Create -->
     <insert id="save" parameterType="com.life.finmate.goal.domain.Goal" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO goals
@@ -28,7 +28,6 @@
         FROM goals
         WHERE user_id = #{userId}
     </select>
-
     <select id="findById" parameterType="java.lang.Long" resultMap="goalResultMap">
         SELECT *
         FROM goals
@@ -36,13 +35,29 @@
     </select>
 
     <!-- Update -->
-    <update id="updateById" parameterType="com.life.finmate.goal.domain.Goal">
+    <select id="findById" parameterType="long" resultType="com.life.finmate.goal.domain.Goal">
+        SELECT *
+        FROM goals
+        WHERE id = #{Id}
+    </select>
+
+    <update id="updateById" parameterType="long" keyProperty="id">
         UPDATE goals SET
-            goal_name = #{goalName},
-            goal_type = #{goalType},
-            target_amount = #{targetAmount},
-            current_amount = #{currentAmount},
-            target_date = #{targetDate},
+            <if test="goalName != null and goalName != ''">
+                goal_name = #{goalName},
+            </if>
+            <if test="goalType != null and goalType != ''">
+                goal_type = #{goalType},
+            </if>
+            <if test="targetAmount != null and targetAmount != ''">
+                target_amount = #{targetAmount},
+            </if>
+            <if test="currentAmount != null and currentAmount != ''">
+                current_amount = #{currentAmount},
+            </if>
+            <if test="targetDate != null and targetDate">
+                target_date = #{targetDate},
+            </if>
             updated_at = NOW()
         WHERE
             id = #{id}
