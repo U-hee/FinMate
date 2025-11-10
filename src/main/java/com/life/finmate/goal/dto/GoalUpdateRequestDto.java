@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 public class GoalUpdateRequestDto {
+    private Long id;
     private Long userId;
     private String goalName;
     private String goalType;
@@ -20,6 +21,7 @@ public class GoalUpdateRequestDto {
 
     public Goal toEntity() {
         return Goal.builder()
+                .id(this.id)
                 .userId(this.userId)
                 .goalName(this.goalName)
                 .goalType(this.goalType)
@@ -32,6 +34,7 @@ public class GoalUpdateRequestDto {
 
     public GoalUpdateRequestDto from(Goal goal) {
         return GoalUpdateRequestDto.builder()
+                .id(goal.getId())
                 .userId(goal.getUserId())
                 .goalName(goal.getGoalName())
                 .goalType(goal.getGoalType())
@@ -41,6 +44,5 @@ public class GoalUpdateRequestDto {
                 .updatedAt(LocalDateTime.now())
                 .build();
     }
-
 
 }

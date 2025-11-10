@@ -77,6 +77,7 @@ class GoalServiceTest {
         // given
         long userId = 1L;
         String goalName = "english test";
+
         GoalCreateRequestDto goalDto = GoalCreateRequestDto.builder()
                 .userId(userId)
                 .goalType("saving")
@@ -117,7 +118,7 @@ class GoalServiceTest {
                 .build();
 
         //when
-        Goal goal = goalService.updateById(save.getId(), updateGoalData);
+        Goal goal = goalService.updateById(updateGoalData);
 
         //then
         assertThat(goal.getGoalName()).isEqualTo(newGoalName);
