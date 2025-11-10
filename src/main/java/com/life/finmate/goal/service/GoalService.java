@@ -24,7 +24,7 @@ public class GoalService {
         return goal;
     }
 
-    public List<Goal> findByUserId(long userId) {
+    public List<Goal> findByUserId(Long userId) {
         List<Goal> result = goalMapper.findByUserId(userId);
         if (result.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT FOUND");

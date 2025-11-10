@@ -67,7 +67,7 @@ class GoalServiceTest {
        //then
         assertThat(goals).isNotNull();
         assertThat(goals).isNotEmpty();
-        assertThat(goals.getFirst().getGoalName()).isEqualTo("에베베");
+        assertThat(goals.getFirst().getGoalName()).isEqualTo("test");
     }
 
     @Test
@@ -88,6 +88,7 @@ class GoalServiceTest {
         Goal save = goalService.save(goalDto);
 
         // when
+        System.out.println(save.getId());
         Goal resultGoal = goalService.findById(save.getId());
 
         // then
@@ -117,7 +118,7 @@ class GoalServiceTest {
                 .build();
 
         //when
-        Goal goal = goalService.updateById(updateGoalData);
+        Goal goal = goalService.updateById(save.getId(), updateGoalData);
 
         //then
         assertThat(goal.getGoalName()).isEqualTo(newGoalName);
