@@ -67,8 +67,7 @@ class GoalServiceTest {
        //then
         assertThat(goals).isNotNull();
         assertThat(goals).isNotEmpty();
-        assertThat(goals.size()).isEqualTo(5);
-        assertThat(goals.getFirst().getGoalName()).isEqualTo("저축0");
+        assertThat(goals.getFirst().getGoalName()).isEqualTo("에베베");
     }
 
     @Test

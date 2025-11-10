@@ -59,6 +59,7 @@ public class GoalResponseDto {
                 .goalType(goal.getGoalType())
                 .targetAmount(goal.getTargetAmount())
                 .currentAmount(goal.getCurrentAmount())
+                .targetDate(goal.getTargetDate())
                 .isCompleted(goal.getIsCompleted())
                 .createdAt(goal.getCreatedAt())
                 .updatedAt(goal.getUpdatedAt())
