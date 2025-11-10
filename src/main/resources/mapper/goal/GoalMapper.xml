@@ -3,6 +3,17 @@
 
 <mapper namespace="com.life.finmate.goal.mapper.GoalMapper">
 
+    <resultMap id="goalResultMap" type="com.life.finmate.goal.domain.Goal">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="goalName" column="goal_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="goalType" column="goal_type"/>
+        <result property="targetAmount" column="target_amount"/>
+        <result property="targetDate" column="target_date"/>
+        <result property="currentAmount" column="current_amount"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+   </resultMap>
     <!-- Create -->
     <insert id="save" parameterType="com.life.finmate.goal.domain.Goal" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO goals
@@ -12,36 +23,26 @@
     </insert>
 
     <!-- Read -->
-    <select id="findByUserId" parameterType="long" resultType="com.life.finmate.goal.domain.Goal">
+    <select id="findByUserId" parameterType="long" resultMap="goalResultMap">
         SELECT *
         FROM goals
         WHERE user_id = #{userId}
     </select>
 
-    <select id="findById" parameterType="long" resultType="com.life.finmate.goal.domain.Goal">
+    <select id="findById" parameterType="java.lang.Long" resultMap="goalResultMap">
         SELECT *
         FROM goals
-        WHERE id = #{Id}
+        WHERE id = #{id}
     </select>
 
     <!-- Update -->
-    <update id="updateById" parameterType="long" keyProperty="id">
+    <update id="updateById" parameterType="com.life.finmate.goal.domain.Goal">
         UPDATE goals SET
-            <if test="goalName != null and goalName != ''">
-                goal_name = #{goalName},
-            </if>
-            <if test="goalType != null and goalType != ''">
-                goal_type = #{goalType},
-            </if>
-            <if test="targetAmount != null and targetAmount != ''">
-                target_amount = #{targetAmount},
-            </if>
-            <if test="currentAmount != null and currentAmount != ''">
-                current_amount = #{currentAmount},
-            </if>
-            <if test="targetDate != null and targetDate">
-                target_date = #{targetDate},
-            </if>
+            goal_name = #{goalName},
+            goal_type = #{goalType},
+            target_amount = #{targetAmount},
+            current_amount = #{currentAmount},
+            target_date = #{targetDate},
             updated_at = NOW()
         WHERE
             id = #{id}
