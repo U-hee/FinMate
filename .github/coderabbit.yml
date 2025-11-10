@@ -1,0 +1,38 @@
+pull_request:
+  summary:
+    enabled: true
+    template: |
+      ## 🏷 작업 유형 (선택)
+      - [ ] feat (새 기능)
+      - [ ] fix (버그 수정)
+      - [ ] refactor (리팩토링)
+      - [ ] chore (환경 설정 / 잡일)
+      - [ ] docs (문서 변경)
+      - [ ] style (코드 스타일 변경)
+
+      ## 🌱 브랜치 정보
+      현재 브랜치: {{branch_name}}
+
+      ## 📌 변경 내용 요약
+      {{summary}}
+
+      ## 🔗 관련 이슈 / 참고 링크
+      {{issue_number}}
+
+      ## 👀 리뷰 시 중점적으로 봐줬으면 하는 부분
+      {{notes}}
+
+      ## ⚠️ 기존 기능 영향 (Breaking Changes)
+      - [ ] 있음
+      - [ ] 없음
+
+general:
+  preferred_language: ko
+
+reviews:
+  enabled: true
+  language: ko
+  review_status: true
+
+ui:
+  language: ko
