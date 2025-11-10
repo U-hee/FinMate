@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class UserUpdateRequest {
+public class UserUpdateRequestDto {
     private long id;
     private String email;
     private String password;

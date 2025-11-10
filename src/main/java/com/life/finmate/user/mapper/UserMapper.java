@@ -1,7 +1,7 @@
 package com.life.finmate.user.mapper;
 
 import com.life.finmate.user.domain.User;
-import com.life.finmate.user.dto.UserUpdateRequest;
+import com.life.finmate.user.dto.UserUpdateRequestDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface UserMapper {
     void save(User user);
     Optional<User> findByEmail(String username);
-    int updateUser(UserUpdateRequest userUpdateRequest);
+    int updateUser(UserUpdateRequestDto userUpdateRequestDto);
     int deleteById(Long id);
 }

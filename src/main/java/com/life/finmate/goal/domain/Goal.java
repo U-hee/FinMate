@@ -14,8 +14,8 @@ public class Goal {
     private Long userId;
     private String goalName;
     private String goalType; // saving, debt_repayment, investment
-    private BigDecimal targetAmount;
-    private BigDecimal currentAmount;
+    private Long targetAmount;
+    private Long currentAmount;
     private LocalDate targetDate;
     private Boolean isCompleted;
     private LocalDateTime createdAt;

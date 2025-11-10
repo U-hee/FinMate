@@ -13,7 +13,7 @@
         VALUES
             (#{email}, #{password}, #{userName}, #{currency})
     </insert>
-    <update id="updateUser" parameterType="com.life.finmate.user.dto.UserUpdateRequest">
+    <update id="updateUser" parameterType="com.life.finmate.user.dto.UserUpdateRequestDto">
         update users
             <set>
                 <if test="userName != null and userName != ''">
