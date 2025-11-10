@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.life.finmate.transaction.mapper.TransactionMapper">
+    <select id="selectTransactionsById" parameterType="java.lang.Long" resultType="com.life.finmate.transaction.domain.Transaction">
+        select * from transactions where id = #{id}
+    </select>
+    <select id="selectTransactionsListWithUserId" parameterType="java.lang.Long" resultType="com.life.finmate.transaction.domain.Transaction">
+        select * from transactions where user_id = #{userId}
+    </select>
+    <insert id="insertTransaction" parameterType="com.life.finmate.transaction.domain.Transaction" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO transaction (
+            user_id,
+            account_id,
+            main_category_id,
+            sub_category_id,
+            transaction_type,
+            amount,
+            transaction_date,
+            description,
+            receipt_url,
+            is_recurring,
+            recurring_id
+        ) VALUES (
+             #{userId},
+             #{accountId},
+             #{mainCategoryId},
+             #{subCategoryId},
+             #{transactionType},
+             #{amount},
+             #{transactionDate},
+             #{description},
+             #{receiptUrl},
+             #{isRecurring, jdbcType=TINYINT},
+             #{recurringId}
+         )
+    </insert>
+    <update id="updateTransaction" parameterType="com.life.finmate.transaction.domain.Transaction">
+        UPDATE transaction
+        SET
+            user_id = #{userId},
+            account_id = #{accountId},
+            main_category_id = #{mainCategoryId},
+            sub_category_id = #{subCategoryId},
+            transaction_type = #{transactionType},
+            amount = #{amount},
+            transaction_date = #{transactionDate},
+            description = #{description},
+            receipt_url = #{receiptUrl},
+            is_recurring = #{isRecurring, jdbcType=TINYINT},
+            recurring_id = #{recurringId},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteTransaction" parameterType="java.lang.Long">
+        delete from transaction
+        WHERE
+            id = #{id}
+    </delete>
+</mapper>
