@@ -7,6 +7,7 @@ import com.life.finmate.goal.mapper.GoalMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -37,13 +38,12 @@ public class GoalService {
         );
     }
 
-    public Goal updateById(GoalUpdateRequestDto updateRequestDto) {
-//        Goal goal = findById(updateRequestDto.getId());
-//        GoalUpdateRequestDto fromDto= updateRequestDto.from(goal);
-        Goal resultGoal = updateRequestDto.toEntity();
-
-        goalMapper.updateById(resultGoal);
-        return resultGoal;
+    @Transactional
+    public Goal updateById(Long id, GoalUpdateRequestDto updateRequestDto) {
+        Goal originGoal = findById(id);
+        originGoal.update(updateRequestDto.getGoalName(), updateRequestDto.getGoalType(), updateRequestDto.getTargetAmount(), updateRequestDto.getTargetDate());
+        goalMapper.updateById(originGoal);
+        return originGoal;
     }
 
     public void deleteById(Long id) {

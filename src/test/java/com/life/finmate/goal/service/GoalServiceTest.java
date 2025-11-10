@@ -76,7 +76,8 @@ class GoalServiceTest {
     void findById() {
         // given
         long userId = 1L;
-        String goalName = "저축";
+        String goalName = "english test";
+
         GoalCreateRequestDto goalDto = GoalCreateRequestDto.builder()
                 .userId(userId)
                 .goalType("saving")
@@ -113,7 +114,6 @@ class GoalServiceTest {
         Goal save = goalService.save(goalDto);
 
         GoalUpdateRequestDto updateGoalData = GoalUpdateRequestDto.builder()
-                .id(save.getId())
                 .goalName(newGoalName)
                 .build();
 
