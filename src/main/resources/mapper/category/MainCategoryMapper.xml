@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.life.finmate.category.mapper.MainCategoryMapper">
+
+    <resultMap id="MainCategoryResultMap" type="com.life.finmate.category.domain.MainCategory">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="categoryType" column="category_type"/>
+        <result property="icon" column="icon"/>
+        <result property="color" column="color"/>
+        <result property="isSystem" column="is_system"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <!-- Create -->
+    <insert id="insertCategory" parameterType="com.example.domain.Category" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO main_categories(
+        user_id,
+        category_name,
+        category_type,
+        icon,
+        color,
+        is_system
+    )
+    VALUES (
+        #{userId},
+        #{categoryName},
+        #{categoryType},
+        #{icon},
+        #{color},
+        #{isSystem}
+    )
+    </insert>
+
+    <!-- Read-one -->
+    <select id="selectMainCategoryById" parameterType="java.lang.Long" resultType="com.life.finmate.category.domain.MainCategory">
+       SELECT * FROM main_categories WHERE id = #{id}
+    </select>
+
+    <!-- Read-one -->
+    <select id="selectMainCategoriesByUserId" parameterType="java.lang.Long" resultType="com.life.finmate.category.domain.MainCategory">
+        SELECT * FROM main_categories WHERE user_id= #{userId}
+    </select>
+
+    <!-- Update -->
+    <update id="updateCategoryById" parameterType="com.life.finmate.category.domain.MainCategory">
+        UPDATE main_categories
+        SET
+            user_id = #{userId},
+            category_name = #{categoryName},
+            category_type = #{categoryType},
+            icon = #{icon},
+            color = #{color},
+            is_system = #{isSystem},
+            created_at = #{createdAt}
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- Delete-->
+    <delete id="deleteCategoryById" parameterType="java.lang.Long">
+        DELETE FROM main_categories
+        WHERE id = #{id}
+    </delete>
+</mapper>

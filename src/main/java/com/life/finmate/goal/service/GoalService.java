@@ -18,7 +18,7 @@ public class GoalService {
 
     private final GoalMapper goalMapper;
 
-    public Goal save(GoalCreateRequestDto goalCreateRequestDto) {
+    public Goal createGoal(GoalCreateRequestDto goalCreateRequestDto) {
         Goal goal = goalCreateRequestDto.toEntity();
         goalMapper.save(goal);
         return goal;

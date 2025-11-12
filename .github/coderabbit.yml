@@ -26,13 +26,15 @@ pull_request:
       - [ ] 있음
       - [ ] 없음
 
-general:
-  preferred_language: ko
-
+language: 'ko-KR'
 reviews:
-  enabled: true
-  language: ko
-  review_status: true
+  auto_review:
+    enabled: true              # 모든 PR을 자동 리뷰
 
-ui:
-  language: ko
+  behavior:
+    explain_code_complexity: true  # 코드의 복잡도를 같이 설명
+    suggest_improvements: true     # 개선점을 적극적으로 제안
+    ask_clarifying_questions: false
+
+  comments:
+    tone: "friendly"             # 친근하게

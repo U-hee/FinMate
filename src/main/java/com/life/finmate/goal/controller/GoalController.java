@@ -37,7 +37,7 @@ public class GoalController {
 
     @PostMapping()
     public ResponseEntity<GoalResponseDto> createGoal(@RequestBody GoalCreateRequestDto goalCreateRequestDto) {
-        Goal save = goalService.save(goalCreateRequestDto);
+        Goal save = goalService.createGoal(goalCreateRequestDto);
         GoalResponseDto responseDto = GoalResponseDto.from(save);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }

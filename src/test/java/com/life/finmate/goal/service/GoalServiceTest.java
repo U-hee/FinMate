@@ -26,7 +26,7 @@ class GoalServiceTest {
 
     @Test
     @DisplayName("목표를 저장하는 테스트")
-    void save() {
+    void createGoal() {
         // given
         GoalCreateRequestDto goalDto = GoalCreateRequestDto.builder()
                 .userId(1L)
@@ -38,7 +38,7 @@ class GoalServiceTest {
                 .build();
 
         // when
-        Goal save = goalService.save(goalDto);
+        Goal save = goalService.createGoal(goalDto);
 
         // then
         assertThat(save).isNotNull();
@@ -58,7 +58,7 @@ class GoalServiceTest {
                     .currentAmount(0L)
                     .targetDate(LocalDate.now())
                     .build();
-            goalService.save(goalDto);
+            goalService.createGoal(goalDto);
         }
 
        //when
@@ -85,7 +85,7 @@ class GoalServiceTest {
                 .currentAmount(0L)
                 .targetDate(LocalDate.now())
                 .build();
-        Goal save = goalService.save(goalDto);
+        Goal save = goalService.createGoal(goalDto);
 
         // when
         System.out.println(save.getId());
@@ -111,7 +111,7 @@ class GoalServiceTest {
                 .currentAmount(0L)
                 .targetDate(LocalDate.now())
                 .build();
-        Goal save = goalService.save(goalDto);
+        Goal save = goalService.createGoal(goalDto);
 
         GoalUpdateRequestDto updateGoalData = GoalUpdateRequestDto.builder()
                 .goalName(newGoalName)
@@ -136,7 +136,7 @@ class GoalServiceTest {
                 .currentAmount(0L)
                 .targetDate(LocalDate.now())
                 .build();
-        Goal save = goalService.save(goalDto);
+        Goal save = goalService.createGoal(goalDto);
 
         //when
         goalService.deleteById(save.getId());
