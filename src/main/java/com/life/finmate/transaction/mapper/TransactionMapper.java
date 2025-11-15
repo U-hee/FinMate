@@ -10,14 +10,14 @@ import java.util.Optional;
 public interface TransactionMapper {
 
     // 단일 조회
-    Optional<Transaction> selectTransactionsById();
+    Optional<Transaction> selectTransactionsById(Long id);
 
     //List 조회
-    List<Transaction> selectTransactionsListWithUserId();
+    List<Transaction> selectTransactionsListWithUserId(Long userId);
 
-    Optional<Transaction> insertTransaction();
+    void insertTransaction(Transaction transaction);
 
-    void updateTransaction();
+    Optional<Transaction> updateTransaction(Transaction transaction);
 
-    void deleteTransaction();
+    int deleteTransaction(Long id);
 }
