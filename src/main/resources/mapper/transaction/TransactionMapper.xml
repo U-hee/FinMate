@@ -9,7 +9,7 @@
         select * from transactions where user_id = #{userId}
     </select>
     <insert id="insertTransaction" parameterType="com.life.finmate.transaction.domain.Transaction" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO transaction (
+        INSERT INTO transactions (
             user_id,
             account_id,
             main_category_id,
@@ -36,7 +36,7 @@
          )
     </insert>
     <update id="updateTransaction" parameterType="com.life.finmate.transaction.domain.Transaction">
-        UPDATE transaction
+        UPDATE transactions
         SET
             user_id = #{userId},
             account_id = #{accountId},
@@ -53,7 +53,7 @@
         WHERE id = #{id}
     </update>
     <delete id="deleteTransaction" parameterType="java.lang.Long">
-        delete from transaction
+        delete from transactions
         WHERE
             id = #{id}
     </delete>
